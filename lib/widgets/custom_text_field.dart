@@ -18,6 +18,7 @@ class CustomTextfield extends StatelessWidget {
   final InputBorder? enabledBorder;
   final InputBorder? focusedBorder;
   final Function(String)? onChange;
+  final AutovalidateMode? autovalidateMode;
   const CustomTextfield(
       {super.key,
       required this.hintText,
@@ -35,7 +36,8 @@ class CustomTextfield extends StatelessWidget {
       this.enabledBorder,
       this.focusedBorder,
       this.borderRadius,
-      this.onChange});
+      this.onChange,
+      this.autovalidateMode});
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +60,7 @@ class CustomTextfield extends StatelessWidget {
       validator: validator,
       obscureText: obsecureText,
       readOnly: readOnly,
+      autovalidateMode: autovalidateMode,
       decoration: InputDecoration(
         focusedBorder: focusedBorder,
         enabledBorder: enabledBorder,

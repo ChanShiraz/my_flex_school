@@ -6,8 +6,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height;
-    final double width = MediaQuery.of(context).size.width;
+    var size = MediaQuery.sizeOf(context);
+    double height = size.height;
+    double width = size.width;
     return Scaffold(
       body: SafeArea(
           child: Column(
@@ -44,7 +45,7 @@ class HomePage extends StatelessWidget {
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        padding: EdgeInsets.symmetric(horizontal: width * 0.02),
                         child: CircleAvatar(
                           radius: 5,
                           backgroundColor: AppColors.secColor,

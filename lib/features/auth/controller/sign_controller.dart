@@ -1,20 +1,60 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
+import 'package:my_flex_school/features/home/view/home_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignController extends GetxController {
   var passwordVisible = true.obs;
-  RxString email = ''.obs;
-  RxString password = ''.obs;
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   RxBool isLoading = false.obs;
 
-  setEmail() {
-    email.value = emailController.text;
+  Future<void> signup(
+    BuildContext context, {
+    required String email,
+    required String password,
+  }) async {
+    try {
+      isLoading.value = true;
+      final AuthResponse res = await Supabase.instance.client.auth
+          .signUp(email: email, password: password);
+      isLoading.value = false;
+      if (res.user != null) {
+        Get.offAll(const HomePage());
+      }
+    } on AuthException catch (e) {
+      isLoading.value = false;
+      if (e.message.contains('invalid email')) {
+        _showErrorMessage(context, 'Please enter a valid email address.');
+      } else if (e.message.contains('weak password')) {
+        _showErrorMessage(context, 'Password is too weak. Try a stronger one.');
+      } else if (e.message.contains('email already exists')) {
+        _showErrorMessage(
+            context, 'This email is already registered. Please log in.');
+      } else if (e.message.contains('network error')) {
+        _showErrorMessage(
+            context, 'Network error. Please check your internet connection.');
+      } else {
+        _showErrorMessage(context, 'Sign-up failed: ${e.message}');
+      }
+    } catch (e) {
+      isLoading.value = false;
+      log("message : $e");
+      _showErrorMessage(
+          context, 'An unexpected error occurred. Please try again.');
+    }
   }
 
-  setPassword() {
-    password.value = passwordController.text;
+  void _showErrorMessage(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+        ),
+      ),
+    );
   }
 }
