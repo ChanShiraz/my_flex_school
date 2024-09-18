@@ -6,8 +6,9 @@ import 'package:my_flex_school/features/auth/controller/sign_controller.dart';
 import 'package:my_flex_school/widgets/custom_text_field.dart';
 
 class SignupWidget extends StatelessWidget {
-  SignupWidget({super.key, required this.width});
+  SignupWidget({super.key, required this.width, required this.tabController});
   final double width;
+  final TabController tabController;
   final controller = Get.put(SignController());
   final GlobalKey<FormState> formKey = GlobalKey();
   @override
@@ -79,6 +80,7 @@ class SignupWidget extends StatelessWidget {
                         }
                         controller.signup(
                           context,
+                          tabController,
                           email: controller.emailController.text,
                           password: controller.passwordController.text,
                         );

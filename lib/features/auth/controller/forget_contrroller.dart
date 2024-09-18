@@ -2,39 +2,29 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_flex_school/features/home/view/home_page.dart';
 import 'package:my_flex_school/main.dart';
 import 'package:my_flex_school/utils/extensions/snackbar_extension.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class LoginController extends GetxController {
-  var passwordVisible = true.obs;
+class ForgetController extends GetxController {
+  final TextEditingController emailController = TextEditingController();
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
   RxBool isLoading = false.obs;
 
-  Future<void> login(
+  Future<void> forgetPassword(
     BuildContext context, {
     required String email,
-    required String password,
   }) async {
     try {
       isLoading.value = true;
-      final AuthResponse res = await supabase.auth
-          .signInWithPassword(email: email, password: password);
+      await supabase.auth.resetPasswordForEmail(email);
       isLoading.value = false;
-      if (res.user != null) {
-        emailController.clear();
-        passwordController.clear();
-        Get.offAll(() => HomePage());
-      }
+      emailController.clear();
+      context.showSnackBar("Password reset email sent");
+      Get.back();
     } on AuthException catch (e) {
       isLoading.value = false;
-      if (e.message.contains('invalid login credentials')) {
-        context.showSnackBar('Incorrect email or password. Please try again.',
-            isError: true);
-      } else if (e.message.contains('user not found')) {
+      if (e.message.contains('user not found')) {
         context.showSnackBar(
             'No account found with this email. Please sign up.',
             isError: true);

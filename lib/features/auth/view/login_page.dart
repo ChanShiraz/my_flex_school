@@ -59,7 +59,10 @@ class _LoginPageState extends State<LoginPage>
                         controller: tabController,
                         children: [
                           LoginWidget(width: width),
-                          SignupWidget(width: width)
+                          SignupWidget(
+                            width: width,
+                            tabController: tabController,
+                          )
                         ],
                       ),
                     )

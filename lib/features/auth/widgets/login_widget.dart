@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 import 'package:my_flex_school/features/auth/controller/login_controller.dart';
+import 'package:my_flex_school/features/auth/view/forget_page.dart';
 import 'package:my_flex_school/widgets/custom_text_field.dart';
 
 class LoginWidget extends StatelessWidget {
@@ -64,7 +64,9 @@ class LoginWidget extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() => ForgetPage());
+                },
                 child: const Text(
                   'Forgot Password?',
                   style: TextStyle(color: Colors.black54, fontSize: 12),

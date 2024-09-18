@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:my_flex_school/common/app_colors.dart';
 import 'package:my_flex_school/features/auth/view/login_page.dart';
 import 'package:my_flex_school/features/home/view/home_page.dart';
 import 'package:my_flex_school/utils/theme.dart';
@@ -14,21 +17,26 @@ void main() async {
       authFlowType: AuthFlowType.implicit,
     ),
   );
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: AppColors.mainColor,
+    statusBarIconBrightness: Brightness.light,
+  ));
   runApp(const MyApp());
 }
+
+final supabase = Supabase.instance.client;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'My Flex School',
       theme: themeData,
-      home: Supabase.instance.client.auth.currentUser != null
-          ? const HomePage()
-          : const LoginPage(),
+      home:
+          supabase.auth.currentSession != null ? HomePage() : const LoginPage(),
     );
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:my_flex_school/common/app_colors.dart';
+import 'package:my_flex_school/features/home/controller/home_controller.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
+  HomePage({super.key});
+  final HomeController controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
@@ -22,56 +24,90 @@ class HomePage extends StatelessWidget {
                 bottomRight: Radius.circular(10),
               ),
             ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    width: double.infinity,
-                  ),
-                  const Text(
-                    'MYFLEXSCHOOL',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Row(
+            child: Stack(
+              children: [
+                Center(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        'REACH',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: width * 0.02),
-                        child: CircleAvatar(
-                          radius: 5,
-                          backgroundColor: AppColors.secColor,
-                        ),
+                      const SizedBox(
+                        width: double.infinity,
                       ),
                       const Text(
-                        'CONNECT',
+                        'MYFLEXSCHOOL',
                         style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: CircleAvatar(
-                          radius: 5,
-                          backgroundColor: AppColors.secColor,
-                        ),
-                      ),
-                      const Text(
-                        'ENGAGE',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'REACH',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: width * 0.02),
+                            child: CircleAvatar(
+                              radius: 5,
+                              backgroundColor: AppColors.secColor,
+                            ),
+                          ),
+                          const Text(
+                            'CONNECT',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            child: CircleAvatar(
+                              radius: 5,
+                              backgroundColor: AppColors.secColor,
+                            ),
+                          ),
+                          const Text(
+                            'ENGAGE',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      )
                     ],
-                  )
-                ],
-              ),
+                  ),
+                ),
+                Obx(
+                  () => Positioned(
+                    top: 0,
+                    right: 0,
+                    child: controller.isLoading.value
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              height: 25,
+                              width: 25,
+                              child: CircularProgressIndicator(
+                                color: AppColors.white,
+                              ),
+                            ),
+                          )
+                        : IconButton(
+                            onPressed: () {
+                              controller.signOut(context);
+                            },
+                            icon: Icon(
+                              Icons.logout,
+                              color: AppColors.white,
+                            ),
+                          ),
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(
