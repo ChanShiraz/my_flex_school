@@ -22,9 +22,10 @@ class SignController extends GetxController {
     try {
       isLoading.value = true;
       final AuthResponse res = await supabase.auth.signUp(
-          email: email,
-          password: password,
-          emailRedirectTo: "com.example.my_flex_school://login/");
+        email: email,
+        password: password,
+        emailRedirectTo: "com.example.my_flex_school://login-callback",
+      );
       isLoading.value = false;
       if (res.user != null) {
         FocusScope.of(context).unfocus();

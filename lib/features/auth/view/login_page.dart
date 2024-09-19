@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:my_flex_school/common/app_colors.dart';
 import 'package:my_flex_school/features/auth/widgets/login_widget.dart';
 import 'package:my_flex_school/features/auth/widgets/signup_widget.dart';
+import 'package:my_flex_school/features/home/view/home_page.dart';
+import 'package:my_flex_school/main.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,6 +17,18 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
+  @override
+  void initState() {
+    super.initState();
+    final authSubscription = supabase.auth.onAuthStateChange.listen((data) {
+      final AuthChangeEvent event = data.event;
+      if (event == AuthChangeEvent.signedIn) {
+        Get.offAll(() => HomePage());
+      }
+    });
+    authSubscription.cancel();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);

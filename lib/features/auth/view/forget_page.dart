@@ -12,63 +12,70 @@ class ForgetPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
-    // double height = size.height;
+    double height = size.height;
     double width = size.width;
     return Scaffold(
       backgroundColor: AppColors.mainColor,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Icon(
-                        Icons.shield_outlined,
-                        size: 150,
-                        color: AppColors.white,
-                      ),
-                      Icon(
-                        Icons.lock,
-                        size: 40,
-                        color: AppColors.white,
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20.0),
-                    child: Text(
-                      'Trouble Logging in?',
-                      style: TextStyle(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(color: AppColors.white),
+      ),
+      extendBodyBehindAppBar: true,
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: height,
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: MediaQuery.of(context).padding.top),
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Icon(
+                          Icons.shield_outlined,
+                          size: 150,
                           color: AppColors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold),
+                        ),
+                        Icon(
+                          Icons.lock,
+                          size: 40,
+                          color: AppColors.white,
+                        ),
+                      ],
                     ),
-                  ),
-                  const Text(
-                    "Enter your email and We'll send you \na link to reset your password.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: Text(
+                        'Trouble Logging in?',
+                        style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                ],
+                    const Text(
+                      "Enter your email and We'll send you \na link to reset your password.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Container(
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10))),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: SingleChildScrollView(
+              Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10))),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Form(
                     key: formKey,
                     child: Column(
@@ -130,9 +137,9 @@ class ForgetPage extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
