@@ -1,0 +1,14 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "my_flex_school",
+            "package_name": "com.example.my_flex_school",
+            "sha256_cert_fingerprints": [
+                "DD:51:1D:A8:7A:00:24:D2:AA:BB:F9:BC:A7:24:B5:B1:03:ED:58:1A:EA:F7:02:05:43:44:D6:44:3B:86:47:70"
+            ]
+        }
+    }
+]
