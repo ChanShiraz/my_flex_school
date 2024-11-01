@@ -4,6 +4,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:my_flex_school/common/app_colors.dart';
 import 'package:my_flex_school/features/auth/view/login_page.dart';
 import 'package:my_flex_school/features/home/view/home_page.dart';
+import 'package:my_flex_school/features/profile/view/profile_page.dart';
 import 'package:my_flex_school/utils/theme.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -32,11 +33,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'My Flex School',
-      theme: themeData,
-      home:
-          supabase.auth.currentSession != null ? HomePage() : const LoginPage(),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'My Flex School',
+        theme: themeData,
+        home:   
+        //ProfilePage()
+        supabase.auth.currentSession != null
+            ? const Home()
+            : const LoginPage(),
+        );
   }
 }

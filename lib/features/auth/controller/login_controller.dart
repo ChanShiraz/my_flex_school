@@ -27,7 +27,7 @@ class LoginController extends GetxController {
       if (res.user != null) {
         emailController.clear();
         passwordController.clear();
-        Get.offAll(() => HomePage());
+        Get.offAll(() => Home());
       }
     } on AuthException catch (e) {
       isLoading.value = false;

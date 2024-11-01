@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
+import 'package:my_flex_school/common/app_colors.dart';
 import 'package:my_flex_school/features/auth/controller/login_controller.dart';
 import 'package:my_flex_school/features/auth/view/forget_page.dart';
 import 'package:my_flex_school/widgets/custom_text_field.dart';
@@ -77,7 +78,10 @@ class LoginWidget extends StatelessWidget {
             Obx(
               () => FilledButton(
                 style: ButtonStyle(
-                  minimumSize: WidgetStatePropertyAll(Size(width * 0.5, 45)),
+                  backgroundColor: WidgetStatePropertyAll(AppColors.greenColor),
+                  minimumSize: WidgetStatePropertyAll(
+                    Size(width * 0.5, 45),
+                  ),
                 ),
                 onPressed: controller.isLoading.value
                     ? null

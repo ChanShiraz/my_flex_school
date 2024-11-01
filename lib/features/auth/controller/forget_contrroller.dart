@@ -17,8 +17,8 @@ class ForgetController extends GetxController {
   }) async {
     try {
       isLoading.value = true;
-      await supabase.auth.resetPasswordForEmail(email,
-          redirectTo: "com.example.my_flex_school://login-callback");
+      await supabase.auth
+          .resetPasswordForEmail(email, redirectTo: "https://www.youtube.com/");
       isLoading.value = false;
       emailController.clear();
       context.showSnackBar("Password reset email sent");

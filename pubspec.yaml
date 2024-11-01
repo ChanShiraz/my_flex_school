@@ -16,6 +16,23 @@ dependencies:
   get: ^4.6.6
   supabase_flutter: ^2.6.0
   form_validator: ^2.1.1
+  intl: ^0.19.0
+  geocoding: ^3.0.0
+  geolocator: ^13.0.1
+  video_player: ^2.9.1
+  image_picker: ^1.1.2
+  bottom_navy_bar: ^6.1.0
+  flashy_tab_bar2: ^0.0.10
+  chewie: ^1.8.5
+  flutter_launcher_icons: ^0.14.0
+  flutter_native_splash: ^2.4.1
+  video_thumbnail: ^0.5.3
+  path_provider: ^2.1.4
+  youtube_player_flutter: ^9.1.1
+  cached_network_image: ^3.4.1
+  float_column: ^2.1.8
+  url_launcher: ^6.3.1
+  
 
 dev_dependencies:
   flutter_test:
@@ -26,8 +43,25 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/launcher.png"
+  min_sdk_android: 21 
+
+flutter_native_splash:
+  color: "#ffffff" 
+  image: assets/images/splash.png
+  ios: true 
+  web: false 
+  android_12:
+    image: assets/images/splash.png
+    icon_background_color: "#ffffff"
+    icon_background_color_dark: "#ffffff"
+
   #   - images/a_dot_ham.jpeg
 
   # fonts:
